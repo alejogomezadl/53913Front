@@ -4,20 +4,49 @@ import { Component } from "react";
 class Lista extends Component {
 
     constructor(props) {
-        
+
         super(props)
         console.log("Constructor")
+        this.state = {
+            mostrar: true
+        }
     }
 
 
-   componentWillMount(){
+
+    componentWillMount() {
+        //ciclo montaje antes del render
         console.log("componentWillMount")
-
-
     }
 
-    componentDidMount(){
+    componentDidMount() {
+        //ciclo montaje despues del render
         console.log("componentDidMount")
+    }
+
+
+    shouldComponentUpdate(nextProps, nextState) {
+        //Funcion del ciclo de vida que controla la actualizacion de mi vista
+        console.log('estate ', this.state)
+        console.log('shouldComponentUpdate ', nextState)
+
+        return this.state !== nextState
+    }
+
+    componentWillUpdate() {
+        //ciclo de actualizacion antes de render
+        console.log("componentWillUpdate")
+    }
+
+    componentWillUnmount() {
+        console.log("componentWillUnmount")
+    }
+
+    ocultarValor() {
+        this.setState({
+            mostrar: !this.state.mostrar
+        })
+        console.log(this.state.mostrar)
     }
 
     render() {
@@ -33,7 +62,7 @@ class Lista extends Component {
                                 <li>
                                     <p> tipo: {elem.tipo} </p>
                                     {
-                                        elem.mostrar ?
+                                        this.state.mostrar ?
                                             <p> valor: {elem.valor} </p>
                                             : <p> valor:  **********</p>
                                     }
@@ -43,9 +72,7 @@ class Lista extends Component {
                         })
                     }
                 </ul>
-
-
-
+                <button onClick={this.ocultarValor.bind(this)}>Ocultar</button>
             </div>
         )
     }

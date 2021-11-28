@@ -1,7 +1,11 @@
 
+import { BrowserRouter,Link,Route ,Routes} from 'react-router-dom';
 import './App.css';
 import Lista from './components/lista'
 import Saludo from './components/Saludo';
+import Registro from './pages/Registro';
+import Usuarios from './pages/usuarios';
+import Validacion from './pages/Validacion';
 
 
 const operaciones = [
@@ -36,11 +40,26 @@ const operaciones = [
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <Saludo nombre="carlos" ></Saludo>
-
-        <Lista nombre="pedro" operacion={operaciones} ></Lista>
-      </header>
+      <BrowserRouter>
+        <nav>
+          <Link to="/">Home</Link>
+          <br/>
+          <Link to="/operaciones">Lista</Link>
+          <br/>
+          <Link to="/validacion">validacion</Link>
+          <br/>
+          <Link to="/registro">registro</Link>
+          <br/>
+          <Link to="/usuarios">usuarios</Link>
+        </nav>
+        <Routes>
+          <Route path='/'  element={ <Saludo nombre="carlos" apellido="Gomez" />}/>
+          <Route path='/operaciones'  element={ <Lista nombre="pedro" operacion={operaciones} />}/>
+          <Route path='/validacion'  element={ <Validacion />}/>
+          <Route path='/registro'  element={ <Registro />}/>
+          <Route path='/usuarios'  element={ <Usuarios />}/>
+        </Routes>     
+      </BrowserRouter>
     </div>
   );
 }
