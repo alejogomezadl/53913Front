@@ -8,14 +8,24 @@ const Usuarios = () => {
     const [resultado, setResultado] = useState('')
 
 
-    const setService = () => {
-        let body = { "monto": 2000, "tipo": "ingreso", "categoría": "sueldo", "fecha": "10/01/2015" }
+
+
+    const enviar = (ev) => {
+        ev.preventDefault();
+
+        let body = {
+            "descripcion": ev.target.descripcion.value,
+            "fecha": ev.target.fecha.value,
+            "valor": parseInt(ev.target.valor.value),
+            "id": parseInt(ev.target.id.value),
+        }
         setUsuarios(body).then(
             (resp) => {
                 console.log(resp);
-              setResultado(resp.data)
             }
         )
+
+
     }
 
     const getService = () => {
@@ -43,9 +53,25 @@ const Usuarios = () => {
                     )
                 }
             </ul>
+
+
+            <div>
+
+                <form onSubmit={enviar}>
+                    <label>descripcion:</label><input type="text" name='descripcion' /> <br />
+                    <label>fecha:</label><input type="text" name='fecha' /> <br />
+                    <label>valor:</label><input type="text" name='valor' /> <br />
+                    <label>id:</label><input type="text" name='id' /> <br />
+
+                    <button type="submit">Enviar</button>
+                </form>
+
+
+            </div>
+
             <button onClick={getService}>Invocar</button>
 
-            <button onClick={setService}>enviar</button>
+
         </div>
     )
 

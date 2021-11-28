@@ -8,10 +8,9 @@ const getUsuarios = (val) => {
 
 const setUsuarios = (body) => {
 
-    return axios.post("https://misiontic2022upb.vercel.app/api/personal-finance/operations"
+    return axios.post("http://localhost:3000/finanzas/gastos"
     ,body
     )
 }
-
 
 module.exports = { getUsuarios,setUsuarios }
